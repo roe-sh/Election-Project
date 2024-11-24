@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fafdaf0152ed452b8098fd78aaabd484" Name="Diagram1">
+        <EntityTypeShape EntityType="ElectionModel.Admin" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.Ad" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.Debate" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.Feedback" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.LocalCandidate" Width="1.5" PointX="9.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.LocalList" Width="1.5" PointX="12" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.PartyCandidate" Width="1.5" PointX="9.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.PartyList" Width="1.5" PointX="12" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.TempAd" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.TempCandidateLocal" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.TempDebate" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.TempPartyCandidate" Width="1.5" PointX="7.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.User" Width="1.5" PointX="5.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="ElectionModel.FK__Admin__fk_ads__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectionModel.FK__Admin__fk_debate__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectionModel.FK__Admin__fk_feedba__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectionModel.FK__TempCandi__fk_ad__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectionModel.FK__TempParty__fk_ad__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectionModel.fk_ads" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectionModel.fk_debates" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectionModel.fk_local" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectionModel.fk_local_counter" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectionModel.fk_counter" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectionModel.fk_party" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

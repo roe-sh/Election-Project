@@ -1,0 +1,966 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ElectionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" />
+          <Property Name="fk_ads" Type="bigint" />
+          <Property Name="fk_debates" Type="bigint" />
+          <Property Name="fk_feedback" Type="bigint" />
+          <Property Name="username" Type="nvarchar" MaxLength="255" />
+          <Property Name="IMG" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Ads">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+          <Property Name="areaelection" Type="nvarchar" MaxLength="255" />
+          <Property Name="listname" Type="nvarchar" MaxLength="255" />
+          <Property Name="image" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Debates">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="listname" Type="nvarchar" MaxLength="255" />
+          <Property Name="areaelection" Type="nvarchar" MaxLength="255" />
+          <Property Name="time" Type="nvarchar" MaxLength="255" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="subject" Type="nvarchar" MaxLength="255" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LocalCandidate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="national_id" Type="bigint" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="listname" Type="nvarchar" MaxLength="255" />
+          <Property Name="type_of_chair" Type="nvarchar" MaxLength="255" />
+          <Property Name="gender" Type="nvarchar" MaxLength="255" />
+          <Property Name="birthdate" Type="nvarchar" MaxLength="255" />
+          <Property Name="votes_counter" Type="bigint" />
+          <Property Name="religion" Type="nvarchar" MaxLength="255" />
+          <Property Name="fk_local_vote" Type="bigint" />
+          <Property Name="electionarea" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LocalLists">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="listname" Type="nvarchar" MaxLength="255" />
+          <Property Name="votes_counter" Type="bigint" />
+          <Property Name="electionDistrict" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="PartyCandidate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="partyname" Type="nvarchar" MaxLength="255" />
+          <Property Name="electionarea" Type="nvarchar" MaxLength="255" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="national_id" Type="bigint" />
+          <Property Name="gender" Type="nvarchar" MaxLength="255" />
+          <Property Name="birthdate" Type="nvarchar" MaxLength="255" />
+          <Property Name="religion" Type="nvarchar" MaxLength="255" />
+          <Property Name="ordercandidate" Type="bigint" />
+          <Property Name="fk_counter" Type="bigint" />
+        </EntityType>
+        <EntityType Name="PartyLists">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="listname" Type="nvarchar" MaxLength="255" />
+          <Property Name="votes_counter" Type="bigint" />
+          <Property Name="electionDistrict" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TempAds">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="listname" Type="nvarchar" MaxLength="255" />
+          <Property Name="electionarea" Type="nvarchar" MaxLength="255" />
+          <Property Name="image" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TempCandidateLocal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="national_id" Type="bigint" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="listname" Type="nvarchar" MaxLength="255" />
+          <Property Name="type_of_chair" Type="nvarchar" MaxLength="255" />
+          <Property Name="gender" Type="nvarchar" MaxLength="255" />
+          <Property Name="birthdate" Type="nvarchar" MaxLength="255" />
+          <Property Name="votes_counter" Type="bigint" />
+          <Property Name="religion" Type="nvarchar" MaxLength="255" />
+          <Property Name="fk_admin" Type="bigint" />
+          <Property Name="electionarea" Type="nvarchar" MaxLength="255" />
+          <Property Name="city" Type="nvarchar" MaxLength="255" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TempDebates">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="listname" Type="nvarchar" MaxLength="255" />
+          <Property Name="areaelection" Type="nvarchar" MaxLength="255" />
+          <Property Name="CandidateName" Type="nvarchar" MaxLength="255" />
+          <Property Name="NationalNum" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="255" />
+          <Property Name="debateDate" Type="varchar" MaxLength="255" />
+          <Property Name="debateTime" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="TempPartyCandidate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="national_id" Type="bigint" />
+          <Property Name="electionarea" Type="nvarchar" MaxLength="255" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="partyname" Type="nvarchar" MaxLength="255" />
+          <Property Name="gender" Type="nvarchar" MaxLength="255" />
+          <Property Name="birthdate" Type="nvarchar" MaxLength="255" />
+          <Property Name="religion" Type="nvarchar" MaxLength="255" />
+          <Property Name="ordercandidate" Type="bigint" />
+          <Property Name="candidatename" Type="nvarchar" MaxLength="255" />
+          <Property Name="fk_admin" Type="bigint" />
+          <Property Name="city" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="national_id" Type="bigint" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="electionarea" Type="nvarchar" MaxLength="255" />
+          <Property Name="voteLocal" Type="bigint" />
+          <Property Name="voteParty" Type="bigint" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" />
+          <Property Name="gender" Type="nvarchar" MaxLength="255" />
+          <Property Name="religion" Type="nvarchar" MaxLength="255" />
+          <Property Name="birthdate" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Admin__fk_ads__412EB0B6">
+          <End Role="Ads" Type="Self.Ads" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ads">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="fk_ads" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Admin__fk_debate__4222D4EF">
+          <End Role="Debates" Type="Self.Debates" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Debates">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="fk_debates" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Admin__fk_feedba__4316F928">
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feedback">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="fk_feedback" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TempCandi__fk_ad__4CA06362">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="TempCandidateLocal" Type="Self.TempCandidateLocal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TempCandidateLocal">
+              <PropertyRef Name="fk_admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TempParty__fk_ad__45F365D3">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="TempPartyCandidate" Type="Self.TempPartyCandidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TempPartyCandidate">
+              <PropertyRef Name="fk_admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ads">
+          <End Role="TempAds" Type="Self.TempAds" Multiplicity="1" />
+          <End Role="Ads" Type="Self.Ads" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TempAds">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ads">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_counter">
+          <End Role="PartyCandidate" Type="Self.PartyCandidate" Multiplicity="0..1" />
+          <End Role="PartyLists" Type="Self.PartyLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartyCandidate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PartyLists">
+              <PropertyRef Name="votes_counter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_debates">
+          <End Role="TempDebates" Type="Self.TempDebates" Multiplicity="1" />
+          <End Role="Debates" Type="Self.Debates" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TempDebates">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Debates">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_local">
+          <End Role="TempCandidateLocal" Type="Self.TempCandidateLocal" Multiplicity="1" />
+          <End Role="LocalCandidate" Type="Self.LocalCandidate" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TempCandidateLocal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LocalCandidate">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_local_counter">
+          <End Role="LocalCandidate" Type="Self.LocalCandidate" Multiplicity="0..1" />
+          <End Role="LocalLists" Type="Self.LocalLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocalCandidate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LocalLists">
+              <PropertyRef Name="votes_counter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_party">
+          <End Role="TempPartyCandidate" Type="Self.TempPartyCandidate" Multiplicity="1" />
+          <End Role="PartyCandidate" Type="Self.PartyCandidate" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TempPartyCandidate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PartyCandidate">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ElectionModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ads" EntityType="Self.Ads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Debates" EntityType="Self.Debates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocalCandidate" EntityType="Self.LocalCandidate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocalLists" EntityType="Self.LocalLists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartyCandidate" EntityType="Self.PartyCandidate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartyLists" EntityType="Self.PartyLists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempAds" EntityType="Self.TempAds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempCandidateLocal" EntityType="Self.TempCandidateLocal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempDebates" EntityType="Self.TempDebates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempPartyCandidate" EntityType="Self.TempPartyCandidate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Admin__fk_ads__412EB0B6" Association="Self.FK__Admin__fk_ads__412EB0B6">
+            <End Role="Ads" EntitySet="Ads" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Admin__fk_debate__4222D4EF" Association="Self.FK__Admin__fk_debate__4222D4EF">
+            <End Role="Debates" EntitySet="Debates" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Admin__fk_feedba__4316F928" Association="Self.FK__Admin__fk_feedba__4316F928">
+            <End Role="Feedback" EntitySet="Feedback" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TempCandi__fk_ad__4CA06362" Association="Self.FK__TempCandi__fk_ad__4CA06362">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="TempCandidateLocal" EntitySet="TempCandidateLocal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TempParty__fk_ad__45F365D3" Association="Self.FK__TempParty__fk_ad__45F365D3">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="TempPartyCandidate" EntitySet="TempPartyCandidate" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ads" Association="Self.fk_ads">
+            <End Role="TempAds" EntitySet="TempAds" />
+            <End Role="Ads" EntitySet="Ads" />
+          </AssociationSet>
+          <AssociationSet Name="fk_counter" Association="Self.fk_counter">
+            <End Role="PartyCandidate" EntitySet="PartyCandidate" />
+            <End Role="PartyLists" EntitySet="PartyLists" />
+          </AssociationSet>
+          <AssociationSet Name="fk_debates" Association="Self.fk_debates">
+            <End Role="TempDebates" EntitySet="TempDebates" />
+            <End Role="Debates" EntitySet="Debates" />
+          </AssociationSet>
+          <AssociationSet Name="fk_local" Association="Self.fk_local">
+            <End Role="TempCandidateLocal" EntitySet="TempCandidateLocal" />
+            <End Role="LocalCandidate" EntitySet="LocalCandidate" />
+          </AssociationSet>
+          <AssociationSet Name="fk_local_counter" Association="Self.fk_local_counter">
+            <End Role="LocalCandidate" EntitySet="LocalCandidate" />
+            <End Role="LocalLists" EntitySet="LocalLists" />
+          </AssociationSet>
+          <AssociationSet Name="fk_party" Association="Self.fk_party">
+            <End Role="TempPartyCandidate" EntitySet="TempPartyCandidate" />
+            <End Role="PartyCandidate" EntitySet="PartyCandidate" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ElectionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fk_ads" Type="Int64" />
+          <Property Name="fk_debates" Type="Int64" />
+          <Property Name="fk_feedback" Type="Int64" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IMG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ad" Relationship="Self.FK__Admin__fk_ads__412EB0B6" FromRole="Admin" ToRole="Ads" />
+          <NavigationProperty Name="Debate" Relationship="Self.FK__Admin__fk_debate__4222D4EF" FromRole="Admin" ToRole="Debates" />
+          <NavigationProperty Name="Feedback" Relationship="Self.FK__Admin__fk_feedba__4316F928" FromRole="Admin" ToRole="Feedback" />
+          <NavigationProperty Name="TempCandidateLocals" Relationship="Self.FK__TempCandi__fk_ad__4CA06362" FromRole="Admin" ToRole="TempCandidateLocal" />
+          <NavigationProperty Name="TempPartyCandidates" Relationship="Self.FK__TempParty__fk_ad__45F365D3" FromRole="Admin" ToRole="TempPartyCandidate" />
+        </EntityType>
+        <EntityType Name="Ad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="areaelection" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="listname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK__Admin__fk_ads__412EB0B6" FromRole="Ads" ToRole="Admin" />
+          <NavigationProperty Name="TempAd" Relationship="Self.fk_ads" FromRole="Ads" ToRole="TempAds" />
+        </EntityType>
+        <EntityType Name="Debate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="listname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="areaelection" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="time" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK__Admin__fk_debate__4222D4EF" FromRole="Debates" ToRole="Admin" />
+          <NavigationProperty Name="TempDebate" Relationship="Self.fk_debates" FromRole="Debates" ToRole="TempDebates" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="subject" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK__Admin__fk_feedba__4316F928" FromRole="Feedback" ToRole="Admin" />
+        </EntityType>
+        <EntityType Name="LocalCandidate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="national_id" Type="Int64" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="listname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="type_of_chair" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="birthdate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="votes_counter" Type="Int64" />
+          <Property Name="religion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fk_local_vote" Type="Int64" />
+          <Property Name="electionarea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TempCandidateLocal" Relationship="Self.fk_local" FromRole="LocalCandidate" ToRole="TempCandidateLocal" />
+          <NavigationProperty Name="LocalLists" Relationship="Self.fk_local_counter" FromRole="LocalCandidate" ToRole="LocalLists" />
+        </EntityType>
+        <EntityType Name="LocalList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="listname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="votes_counter" Type="Int64" />
+          <Property Name="electionDistrict" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LocalCandidate" Relationship="Self.fk_local_counter" FromRole="LocalLists" ToRole="LocalCandidate" />
+        </EntityType>
+        <EntityType Name="PartyCandidate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="partyname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="electionarea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="national_id" Type="Int64" />
+          <Property Name="gender" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="birthdate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="religion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ordercandidate" Type="Int64" />
+          <Property Name="fk_counter" Type="Int64" />
+          <NavigationProperty Name="PartyLists" Relationship="Self.fk_counter" FromRole="PartyCandidate" ToRole="PartyLists" />
+          <NavigationProperty Name="TempPartyCandidate" Relationship="Self.fk_party" FromRole="PartyCandidate" ToRole="TempPartyCandidate" />
+        </EntityType>
+        <EntityType Name="PartyList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="listname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="votes_counter" Type="Int64" />
+          <Property Name="electionDistrict" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PartyCandidate" Relationship="Self.fk_counter" FromRole="PartyLists" ToRole="PartyCandidate" />
+        </EntityType>
+        <EntityType Name="TempAd">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="listname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="electionarea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ad" Relationship="Self.fk_ads" FromRole="TempAds" ToRole="Ads" />
+        </EntityType>
+        <EntityType Name="TempCandidateLocal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="national_id" Type="Int64" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="listname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="type_of_chair" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="birthdate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="votes_counter" Type="Int64" />
+          <Property Name="religion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fk_admin" Type="Int64" />
+          <Property Name="electionarea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK__TempCandi__fk_ad__4CA06362" FromRole="TempCandidateLocal" ToRole="Admin" />
+          <NavigationProperty Name="LocalCandidate" Relationship="Self.fk_local" FromRole="TempCandidateLocal" ToRole="LocalCandidate" />
+        </EntityType>
+        <EntityType Name="TempDebate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="listname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="areaelection" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CandidateName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NationalNum" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="debateDate" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="debateTime" Type="Time" Precision="7" />
+          <NavigationProperty Name="Debate" Relationship="Self.fk_debates" FromRole="TempDebates" ToRole="Debates" />
+        </EntityType>
+        <EntityType Name="TempPartyCandidate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="national_id" Type="Int64" />
+          <Property Name="electionarea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="partyname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="birthdate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="religion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ordercandidate" Type="Int64" />
+          <Property Name="candidatename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fk_admin" Type="Int64" />
+          <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK__TempParty__fk_ad__45F365D3" FromRole="TempPartyCandidate" ToRole="Admin" />
+          <NavigationProperty Name="PartyCandidate" Relationship="Self.fk_party" FromRole="TempPartyCandidate" ToRole="PartyCandidate" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="national_id" Type="Int64" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="electionarea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="voteLocal" Type="Int64" />
+          <Property Name="voteParty" Type="Int64" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="religion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="birthdate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Admin__fk_ads__412EB0B6">
+          <End Role="Ads" Type="Self.Ad" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ads">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="fk_ads" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Admin__fk_debate__4222D4EF">
+          <End Role="Debates" Type="Self.Debate" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Debates">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="fk_debates" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Admin__fk_feedba__4316F928">
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feedback">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="fk_feedback" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TempCandi__fk_ad__4CA06362">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="TempCandidateLocal" Type="Self.TempCandidateLocal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TempCandidateLocal">
+              <PropertyRef Name="fk_admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TempParty__fk_ad__45F365D3">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="TempPartyCandidate" Type="Self.TempPartyCandidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TempPartyCandidate">
+              <PropertyRef Name="fk_admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ads">
+          <End Role="TempAds" Type="Self.TempAd" Multiplicity="1" />
+          <End Role="Ads" Type="Self.Ad" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TempAds">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ads">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_debates">
+          <End Role="TempDebates" Type="Self.TempDebate" Multiplicity="1" />
+          <End Role="Debates" Type="Self.Debate" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TempDebates">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Debates">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_local">
+          <End Role="TempCandidateLocal" Type="Self.TempCandidateLocal" Multiplicity="1" />
+          <End Role="LocalCandidate" Type="Self.LocalCandidate" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TempCandidateLocal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LocalCandidate">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_local_counter">
+          <End Role="LocalCandidate" Type="Self.LocalCandidate" Multiplicity="0..1" />
+          <End Role="LocalLists" Type="Self.LocalList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocalCandidate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LocalLists">
+              <PropertyRef Name="votes_counter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_counter">
+          <End Role="PartyCandidate" Type="Self.PartyCandidate" Multiplicity="0..1" />
+          <End Role="PartyLists" Type="Self.PartyList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartyCandidate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PartyLists">
+              <PropertyRef Name="votes_counter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_party">
+          <End Role="TempPartyCandidate" Type="Self.TempPartyCandidate" Multiplicity="1" />
+          <End Role="PartyCandidate" Type="Self.PartyCandidate" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TempPartyCandidate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PartyCandidate">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ElectionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Ads" EntityType="Self.Ad" />
+          <EntitySet Name="Debates" EntityType="Self.Debate" />
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+          <EntitySet Name="LocalCandidates" EntityType="Self.LocalCandidate" />
+          <EntitySet Name="LocalLists" EntityType="Self.LocalList" />
+          <EntitySet Name="PartyCandidates" EntityType="Self.PartyCandidate" />
+          <EntitySet Name="PartyLists" EntityType="Self.PartyList" />
+          <EntitySet Name="TempAds" EntityType="Self.TempAd" />
+          <EntitySet Name="TempCandidateLocals" EntityType="Self.TempCandidateLocal" />
+          <EntitySet Name="TempDebates" EntityType="Self.TempDebate" />
+          <EntitySet Name="TempPartyCandidates" EntityType="Self.TempPartyCandidate" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Admin__fk_ads__412EB0B6" Association="Self.FK__Admin__fk_ads__412EB0B6">
+            <End Role="Ads" EntitySet="Ads" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Admin__fk_debate__4222D4EF" Association="Self.FK__Admin__fk_debate__4222D4EF">
+            <End Role="Debates" EntitySet="Debates" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Admin__fk_feedba__4316F928" Association="Self.FK__Admin__fk_feedba__4316F928">
+            <End Role="Feedback" EntitySet="Feedbacks" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TempCandi__fk_ad__4CA06362" Association="Self.FK__TempCandi__fk_ad__4CA06362">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="TempCandidateLocal" EntitySet="TempCandidateLocals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TempParty__fk_ad__45F365D3" Association="Self.FK__TempParty__fk_ad__45F365D3">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="TempPartyCandidate" EntitySet="TempPartyCandidates" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ads" Association="Self.fk_ads">
+            <End Role="TempAds" EntitySet="TempAds" />
+            <End Role="Ads" EntitySet="Ads" />
+          </AssociationSet>
+          <AssociationSet Name="fk_debates" Association="Self.fk_debates">
+            <End Role="TempDebates" EntitySet="TempDebates" />
+            <End Role="Debates" EntitySet="Debates" />
+          </AssociationSet>
+          <AssociationSet Name="fk_local" Association="Self.fk_local">
+            <End Role="TempCandidateLocal" EntitySet="TempCandidateLocals" />
+            <End Role="LocalCandidate" EntitySet="LocalCandidates" />
+          </AssociationSet>
+          <AssociationSet Name="fk_local_counter" Association="Self.fk_local_counter">
+            <End Role="LocalCandidate" EntitySet="LocalCandidates" />
+            <End Role="LocalLists" EntitySet="LocalLists" />
+          </AssociationSet>
+          <AssociationSet Name="fk_counter" Association="Self.fk_counter">
+            <End Role="PartyCandidate" EntitySet="PartyCandidates" />
+            <End Role="PartyLists" EntitySet="PartyLists" />
+          </AssociationSet>
+          <AssociationSet Name="fk_party" Association="Self.fk_party">
+            <End Role="TempPartyCandidate" EntitySet="TempPartyCandidates" />
+            <End Role="PartyCandidate" EntitySet="PartyCandidates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ElectionModelStoreContainer" CdmEntityContainer="ElectionEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="ElectionModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="fk_ads" ColumnName="fk_ads" />
+                <ScalarProperty Name="fk_debates" ColumnName="fk_debates" />
+                <ScalarProperty Name="fk_feedback" ColumnName="fk_feedback" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="IMG" ColumnName="IMG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ads">
+            <EntityTypeMapping TypeName="ElectionModel.Ad">
+              <MappingFragment StoreEntitySet="Ads">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="areaelection" ColumnName="areaelection" />
+                <ScalarProperty Name="listname" ColumnName="listname" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Debates">
+            <EntityTypeMapping TypeName="ElectionModel.Debate">
+              <MappingFragment StoreEntitySet="Debates">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="listname" ColumnName="listname" />
+                <ScalarProperty Name="areaelection" ColumnName="areaelection" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="ElectionModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocalCandidates">
+            <EntityTypeMapping TypeName="ElectionModel.LocalCandidate">
+              <MappingFragment StoreEntitySet="LocalCandidate">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="national_id" ColumnName="national_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="listname" ColumnName="listname" />
+                <ScalarProperty Name="type_of_chair" ColumnName="type_of_chair" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="votes_counter" ColumnName="votes_counter" />
+                <ScalarProperty Name="religion" ColumnName="religion" />
+                <ScalarProperty Name="fk_local_vote" ColumnName="fk_local_vote" />
+                <ScalarProperty Name="electionarea" ColumnName="electionarea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocalLists">
+            <EntityTypeMapping TypeName="ElectionModel.LocalList">
+              <MappingFragment StoreEntitySet="LocalLists">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="listname" ColumnName="listname" />
+                <ScalarProperty Name="votes_counter" ColumnName="votes_counter" />
+                <ScalarProperty Name="electionDistrict" ColumnName="electionDistrict" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartyCandidates">
+            <EntityTypeMapping TypeName="ElectionModel.PartyCandidate">
+              <MappingFragment StoreEntitySet="PartyCandidate">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="partyname" ColumnName="partyname" />
+                <ScalarProperty Name="electionarea" ColumnName="electionarea" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="national_id" ColumnName="national_id" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="religion" ColumnName="religion" />
+                <ScalarProperty Name="ordercandidate" ColumnName="ordercandidate" />
+                <ScalarProperty Name="fk_counter" ColumnName="fk_counter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartyLists">
+            <EntityTypeMapping TypeName="ElectionModel.PartyList">
+              <MappingFragment StoreEntitySet="PartyLists">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="listname" ColumnName="listname" />
+                <ScalarProperty Name="votes_counter" ColumnName="votes_counter" />
+                <ScalarProperty Name="electionDistrict" ColumnName="electionDistrict" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempAds">
+            <EntityTypeMapping TypeName="ElectionModel.TempAd">
+              <MappingFragment StoreEntitySet="TempAds">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="listname" ColumnName="listname" />
+                <ScalarProperty Name="electionarea" ColumnName="electionarea" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempCandidateLocals">
+            <EntityTypeMapping TypeName="ElectionModel.TempCandidateLocal">
+              <MappingFragment StoreEntitySet="TempCandidateLocal">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="national_id" ColumnName="national_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="listname" ColumnName="listname" />
+                <ScalarProperty Name="type_of_chair" ColumnName="type_of_chair" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="votes_counter" ColumnName="votes_counter" />
+                <ScalarProperty Name="religion" ColumnName="religion" />
+                <ScalarProperty Name="fk_admin" ColumnName="fk_admin" />
+                <ScalarProperty Name="electionarea" ColumnName="electionarea" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempDebates">
+            <EntityTypeMapping TypeName="ElectionModel.TempDebate">
+              <MappingFragment StoreEntitySet="TempDebates">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="listname" ColumnName="listname" />
+                <ScalarProperty Name="areaelection" ColumnName="areaelection" />
+                <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+                <ScalarProperty Name="NationalNum" ColumnName="NationalNum" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="debateDate" ColumnName="debateDate" />
+                <ScalarProperty Name="debateTime" ColumnName="debateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempPartyCandidates">
+            <EntityTypeMapping TypeName="ElectionModel.TempPartyCandidate">
+              <MappingFragment StoreEntitySet="TempPartyCandidate">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="national_id" ColumnName="national_id" />
+                <ScalarProperty Name="electionarea" ColumnName="electionarea" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="partyname" ColumnName="partyname" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="religion" ColumnName="religion" />
+                <ScalarProperty Name="ordercandidate" ColumnName="ordercandidate" />
+                <ScalarProperty Name="candidatename" ColumnName="candidatename" />
+                <ScalarProperty Name="fk_admin" ColumnName="fk_admin" />
+                <ScalarProperty Name="city" ColumnName="city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ElectionModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="national_id" ColumnName="national_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="electionarea" ColumnName="electionarea" />
+                <ScalarProperty Name="voteLocal" ColumnName="voteLocal" />
+                <ScalarProperty Name="voteParty" ColumnName="voteParty" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="religion" ColumnName="religion" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
